@@ -87,6 +87,32 @@ class MemoRepositoryTest {
 
         System.out.println(result);
 
+        System.out.println("--------------------------------------");
+
+        System.out.println("Total Pages: "+result.getTotalPages());//총 몇 페이지인지
+
+        System.out.println("Total Count: "+result.getTotalElements());//전체 개수
+
+        System.out.println("Page Number: "+result.getNumber());//현재 페이지 번호
+
+        System.out.println("Page Size: "+result.getSize());//페이지당 데이터 개수
+
+        System.out.println("has next page?: "+result.hasNext());//다음 페이지 존재 여부
+
+        System.out.println("First page?: "+result.isFirst());//시작페이지(0) 여부
+
+        System.out.println("--------------------------------------");
+
+        //getContent() 반환형 : List<엔티티타입>
+        for(Memo memo : result.getContent()){
+            System.out.println(memo);
+        }
+
+        System.out.println("--------------------------------------");
+
+        //get() 반환형 : Stream<엔티티타입>
+        result.get().forEach(System.out::println);
+
     }
 
 }
