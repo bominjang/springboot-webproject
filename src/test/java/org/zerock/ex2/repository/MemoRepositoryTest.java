@@ -3,12 +3,12 @@ package org.zerock.ex2.repository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 import org.zerock.ex2.entity.Memo;
 
 import java.util.Optional;
 import java.util.stream.IntStream;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class MemoRepositoryTest {
@@ -43,6 +43,19 @@ class MemoRepositoryTest {
             System.out.println(memo);
         }
 
+    }
+
+    @Transactional
+    @Test
+    public void testSelect2(){
+        //db에 존재하는 mno
+        Long mno = 100L;
+
+        Memo memo = memoRepository.getOne(mno);
+
+        System.out.println("===================================");
+
+        System.out.println(memo);
     }
 
 }
