@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class Memo {
     @Id//PK
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Mno;
+    private Long mno;
 
     @Column(length = 200, nullable = false)
     private String memoText;
