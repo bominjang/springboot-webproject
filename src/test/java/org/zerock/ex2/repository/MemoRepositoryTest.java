@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.zerock.ex2.entity.Memo;
 
+import java.util.Optional;
 import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -26,6 +27,22 @@ class MemoRepositoryTest {
             Memo memo = Memo.builder().memoText("Sample..."+i).build();
             memoRepository.save(memo);
         });
+    }
+
+    @Test
+    public void testSelect(){
+        //db에 존재하는 mno
+        Long mno = 100L;
+
+        Optional<Memo> result = memoRepository.findById(mno);
+
+        System.out.println("===================================");
+
+        if(result.isPresent()){
+            Memo memo = result.get();
+            System.out.println(memo);
+        }
+
     }
 
 }
