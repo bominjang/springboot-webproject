@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
 import org.zerock.ex2.entity.Memo;
 
@@ -139,6 +140,22 @@ class MemoRepositoryTest {
         for(Memo memo : list){
             System.out.println(memo);
         }
+    }
+
+    @Test
+    public void testQueryMethodWithPageable(){
+        Pageable pageable = PageRequest.of(0,10,Sort.by("mno").descending());
+
+        Page<Memo> result = memoRepository.findByMnoBetween(10L, 50L, pageable);
+
+        result.get().forEach(System.out::println);
+    }
+
+    @Commit//최종 결과를 커밋하기 위해 사용. 이를 적용하지 않으면 deleteBy는 기본적으로 롤백 처리 되어서 결과에 반영되지 않음.
+    @Transactional //select문으로 해당 엔티티 객체들을 가져오는 작업과 엔티티를 삭제하는 작업이 같이 이루어지기 때문에 사용.
+    @Test
+    public void testDeleteQueryMethods(){
+        memoRepository.deleteMemoByMnoLessThan(10L);
     }
 
 }
