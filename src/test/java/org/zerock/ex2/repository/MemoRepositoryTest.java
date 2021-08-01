@@ -6,9 +6,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 import org.zerock.ex2.entity.Memo;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
@@ -113,6 +115,30 @@ class MemoRepositoryTest {
         //get() 반환형 : Stream<엔티티타입>
         result.get().forEach(System.out::println);
 
+    }
+
+    @Test
+    public void testSort(){
+        Sort sort1 = Sort.by("mno").descending(); //내림차순 정렬
+        Sort sort2 = Sort.by("memoText").ascending();
+        Sort sortAll = sort1.and(sort2);//and를 이용한 sort1과 sort2의 연결
+
+        Pageable pageable = PageRequest.of(0, 10, sortAll);
+
+        Page<Memo> result = memoRepository.findAll(pageable);
+
+        result.get().forEach(
+                System.out::println
+        );
+    }
+
+    @Test
+    public void testQueryMethods(){
+        List<Memo> list = memoRepository.findByMnoBetweenOrderByMnoDesc(70L, 80L);
+
+        for(Memo memo : list){
+            System.out.println(memo);
+        }
     }
 
 }
