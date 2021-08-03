@@ -155,7 +155,7 @@ class MemoRepositoryTest {
     @Transactional //select문으로 해당 엔티티 객체들을 가져오는 작업과 엔티티를 삭제하는 작업이 같이 이루어지기 때문에 사용.
     @Test
     public void testDeleteQueryMethods(){
-        memoRepository.deleteMemoByMnoLessThan(10L);
+        memoRepository.deleteMemoByMnoLessThan(100L);
     }
 
 }
