@@ -6,7 +6,7 @@
 </head>
 <body>
     <ul>
-        <li th:each="dto, state : ${list}" th:text="${dto.sno % 5 == 0}?${dto.sno}">
+        <li th:each="dto, state : ${list}" th:text="${dto.sno % 5 == 0}?${dto.sno}:${dto.first}">
         </li>
     </ul>
 </body>
