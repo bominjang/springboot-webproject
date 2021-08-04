@@ -6,10 +6,7 @@
 </head>
 <body>
     <ul>
-        <li th:each="dto, state : ${list}">
-            <!--sno가 5로 나눈 나머지가 0인 경우에는 sno만을 출력하고, 그렇지 않다면 SampleDTO의 first를 출력하라-->
-            <span th:if="${dto.sno % 5 == 0}" th:text="${'----------------------------'+dto.sno}"></span>
-            <span th:unless="${dto.sno % 5 == 0}" th:text="${dto.first}"></span>
+        <li th:each="dto, state : ${list}" th:text="${dto.sno % 5 == 0}?${dto.sno}">
         </li>
     </ul>
 </body>
